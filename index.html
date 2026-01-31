@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluetel Rail Systems | Heavy Industrial Rail Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;600;700;900&display=swap');
+        
+        :root {
+            --industry-black: #030a12; /* Deep Navy base */
+            --industry-regal: #05436F; /* Regal Blue */
+            --industry-cherry: #8F0A39; /* Rose Bud Cherry */
+            --industry-tasman: #D3DDD4; /* Tasman */
+            --industry-botticelli: #DBE2EF; /* Botticelli */
+            --text-main: #D3DDD4;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--industry-black);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        .heading-font {
+            font-family: 'Syncopate', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+            height: 350px;
+            max-height: 450px;
+        }
+
+        .industrial-card {
+            background: linear-gradient(145deg, #061626, #030a12);
+            border: 1px solid #1a2a3a;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .industrial-card:hover {
+            border-color: var(--industry-cherry);
+            transform: translateY(-5px);
+        }
+
+        .glow-cherry {
+            text-shadow: 0 0 15px rgba(143, 10, 57, 0.6);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(3, 10, 18, 0.8), rgba(3, 10, 18, 1)), 
+                        url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="%23030a12"/><circle cx="50" cy="50" r="0.5" fill="%2305436F"/></svg>');
+        }
+
+        .nav-link {
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--industry-cherry);
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .active-tab {
+            background: var(--industry-cherry) !important;
+            color: white !important;
+            font-weight: 800;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--industry-black); }
+        ::-webkit-scrollbar-thumb { background: var(--industry-regal); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--industry-cherry); }
+
+        .btn-primary {
+            background-color: var(--industry-regal);
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: var(--industry-cherry);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="w-10 h-10 border-2 border-industry-cherry flex items-center justify-center font-bold text-industry-cherry">B</div>
+                <span class="heading-font text-lg font-bold text-industry-botticelli">BRST</span>
+            </div>
+            <div class="hidden md:flex space-x-10 text-xs font-bold uppercase tracking-widest text-industry-tasman">
+                <a href="#facility" class="nav-link">Facility</a>
+                <a href="#engineering" class="nav-link">Engineering</a>
+                <a href="#partners" class="nav-link">Alliance</a>
+                <a href="#contact" class="nav-link text-industry-cherry">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero-gradient min-h-screen flex items-center pt-20">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <h1 class="heading-font text-5xl md:text-7xl font-black mb-8 leading-[1.1] text-industry-botticelli">
+                    Precision <br/>
+                    <span class="text-industry-cherry glow-cherry">Industrial</span> <br/>
+                    Rail.
+                </h1>
+                <p class="text-industry-tasman/80 text-lg mb-10 border-l-2 border-industry-regal pl-6 max-w-xl">
+                    Bluetel Rail Systems (BRS) merges world-class drivetrain engineering with high-capacity industrial facilities. We are the architects of the **Connected Rail** across Sub-Saharan Africa.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="document.getElementById('facility').scrollIntoView()" class="btn-primary px-8 py-4 font-bold uppercase text-xs tracking-widest transition-all">Explore Facilities</button>
+                    <a href="http://www.brst.co.za" class="border border-industry-tasman/20 text-industry-tasman px-8 py-4 font-bold uppercase text-xs tracking-widest hover:bg-white/5 transition-all">Learn More</a>
+                </div>
+            </div>
+            <div class="hidden lg:grid grid-cols-2 gap-4">
+                <div class="industrial-card p-8 rounded-none border-l-4 border-industry-regal">
+                    <div class="w-8 h-8 mb-4 border border-industry-regal rounded-full flex items-center justify-center text-[10px] text-industry-regal">01</div>
+                    <h3 class="heading-font text-sm mb-2 text-industry-botticelli">Drive Motors</h3>
+                    <p class="text-[10px] text-industry-tasman/60 uppercase tracking-tighter">High-Performance PMSM Systems</p>
+                </div>
+                <div class="industrial-card p-8 rounded-none mt-8 border-l-4 border-industry-cherry">
+                    <div class="w-8 h-8 mb-4 border border-industry-cherry rounded-full flex items-center justify-center text-[10px] text-industry-cherry">02</div>
+                    <h3 class="heading-font text-sm mb-2 text-industry-botticelli">Connectivity</h3>
+                    <p class="text-[10px] text-industry-tasman/60 uppercase tracking-tighter">Integrated Fiber Backbones</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Facility Hub -->
+    <section id="facility" class="py-24 bg-[#041221] border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div>
+                    <span class="text-xs font-bold text-industry-cherry uppercase tracking-[0.3em] mb-4 block">Industrial Capability</span>
+                    <h2 class="heading-font text-4xl font-bold text-industry-botticelli">The Modern Workshop</h2>
+                </div>
+                <div class="flex gap-2 mt-8 md:mt-0">
+                    <button onclick="switchFacility('locomotive')" id="btn-locomotive" class="facility-btn active-tab px-6 py-3 text-[10px] font-black uppercase tracking-widest border border-white/10 transition-all">Locomotive</button>
+                    <button onclick="switchFacility('electric')" id="btn-electric" class="facility-btn px-6 py-3 text-[10px] font-black uppercase tracking-widest border border-white/10 transition-all text-industry-tasman">Electric Hub</button>
+                    <button onclick="switchFacility('digital')" id="btn-digital" class="facility-btn px-6 py-3 text-[10px] font-black uppercase tracking-widest border border-white/10 transition-all text-industry-tasman">Digital Lab</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center" id="facility-display">
+                <!-- Dynamic Content injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Analytics Section -->
+    <section id="engineering" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+                <div>
+                    <h2 class="heading-font text-3xl font-bold mb-8 text-industry-botticelli">Engineering <span class="text-industry-cherry">Modernization</span></h2>
+                    <p class="text-industry-tasman/70 mb-10">
+                        We don't just repair; we repower. Through hybridization and advanced drivetrain integration, we extend the active service life of aging fleets by over a decade.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between p-6 bg-[#041221] border border-white/5">
+                            <span class="text-xs font-bold uppercase tracking-widest">Average Life Extension</span>
+                            <span class="text-xl font-black text-industry-cherry">+15 Yrs</span>
+                        </div>
+                        <div class="flex items-center justify-between p-6 bg-[#041221] border border-white/5">
+                            <span class="text-xs font-bold uppercase tracking-widest">Maintenance Cost Reduction</span>
+                            <span class="text-xl font-black text-industry-regal">-40%</span>
+                        </div>
+                        <div class="flex items-center justify-between p-6 bg-[#041221] border border-white/5">
+                            <span class="text-xs font-bold uppercase tracking-widest">Energy Efficiency Gain</span>
+                            <span class="text-xl font-black text-industry-tasman">+25%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="industrial-card p-8 rounded-lg">
+                    <div class="flex items-center justify-between mb-8">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-industry-tasman/50">Asset Valuation Comparison</span>
+                        <div class="flex items-center space-x-4">
+                            <div class="flex items-center space-x-1"><span class="w-2 h-2 bg-industry-cherry"></span><span class="text-[8px] uppercase">BRS Path</span></div>
+                            <div class="flex items-center space-x-1"><span class="w-2 h-2 bg-industry-regal"></span><span class="text-[8px] uppercase">Legacy Path</span></div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="lifecycleChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Radar -->
+    <section id="partners" class="py-24 bg-[#041221] border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="heading-font text-3xl font-bold text-industry-botticelli">The <span class="text-industry-regal">CAF</span> Partnership</h2>
+                <p class="text-industry-tasman/60 mt-4 max-w-2xl mx-auto">Global mobility initiatives focused on sustainable hydrogen and electric propulsion.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 chart-container">
+                    <canvas id="partnerRadar"></canvas>
+                </div>
+                <div class="order-1 lg:order-2 space-y-8">
+                    <div class="p-8 border-l-2 border-industry-cherry bg-black/20">
+                        <h4 class="heading-font text-sm mb-4 text-industry-botticelli">Sustainable Mobility</h4>
+                        <p class="text-sm text-industry-tasman/70">Implementing heavy-duty hydrogen solutions to decarbonize freight corridors across Africa.</p>
+                    </div>
+                    <div class="p-8 border-l-2 border-white/10 bg-black/20">
+                        <h4 class="heading-font text-sm mb-4 text-industry-botticelli">Technology Transfer</h4>
+                        <p class="text-sm text-industry-tasman/70">Training local artisans and engineers in European ERTMS signaling and PMSM motor winding.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footprint / Contact -->
+    <footer id="contact" class="bg-[#02080f] pt-24 pb-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20">
+                <div class="col-span-1 md:col-span-2">
+                    <h2 class="heading-font text-3xl font-bold mb-8 text-industry-botticelli">BRST.CO.ZA</h2>
+                    <p class="text-industry-tasman/50 max-w-md text-sm leading-relaxed">
+                        Global Mobility. African Footprint. Integrated Engineering. <br/><br/>
+                        Modernizing Africa's rail networks through high-level industrial excellence and digital integration.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-industry-cherry mb-6">Operations</h4>
+                    <ul class="text-xs space-y-4 text-industry-tasman/60">
+                        <li class="font-bold text-industry-botticelli">Gauteng HQ</li>
+                        <li>69 Jean Avenue, Centurion</li>
+                        <li class="font-bold text-industry-botticelli mt-6">Western Cape</li>
+                        <li>Montague Gardens, Cape Town</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-industry-cherry mb-6">Contact</h4>
+                    <ul class="text-xs space-y-4 text-industry-tasman/60">
+                        <li><span class="text-industry-botticelli">General:</span> info@brst.co.za</li>
+                        <li><span class="text-industry-botticelli">Technical:</span> support@brst.co.za</li>
+                        <li><span class="text-industry-botticelli">Web:</span> www.brst.co.za</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-white/5 text-[10px] uppercase font-bold tracking-widest text-industry-tasman/30">
+                <p>&copy; 2026 Bluetel Rail Systems. Industrial Excellence.</p>
+                <div class="flex space-x-8 mt-6 md:mt-0">
+                    <a href="#" class="hover:text-industry-cherry transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-industry-cherry transition-colors">Safety Standards</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const facilityData = {
+            locomotive: {
+                title: "Heavy Locomotive Refurbishment",
+                desc: "Equipped with high-tonnage overhead cranes and specialized pits, our locomotive facility handles full bogie swaps, chassis alignment, and prime mover overhauls.",
+                features: ["Bogie Refurbishment", "Chassis Modernization", "High-Tonnage Lifting", "Industrial Sandblasting"],
+                stat: "4,000 m² Facility"
+            },
+            electric: {
+                title: "Electric Propulsion Center",
+                desc: "Dedicated to the supply and repair of PMSM and BLDC traction motors. We feature clean-room environments for sensitive power electronic assembly.",
+                features: ["Motor Rewinding", "e-Axle Testing", "Clean Room Electronics", "Dynamic Load Testing"],
+                stat: "ISO-7 Assembly"
+            },
+            digital: {
+                title: "Signaling & Digital Lab",
+                desc: "Where rail meets fiber. We implement ERTMS signaling solutions and manage the LeadMind data-diagnostics platform for real-time fleet oversight.",
+                features: ["ERTMS Programming", "LeadMind Dashboards", "Fiber-Optic Splicing", "Predictive Analytics"],
+                stat: "Real-time Monitoring"
+            }
+        };
+
+        function switchFacility(key) {
+            const data = facilityData[key];
+            const display = document.getElementById('facility-display');
+            
+            document.querySelectorAll('.facility-btn').forEach(btn => {
+                btn.classList.remove('active-tab');
+                btn.classList.add('text-industry-tasman');
+            });
+            const activeBtn = document.getElementById(`btn-${key}`);
+            activeBtn.classList.add('active-tab');
+            activeBtn.classList.remove('text-industry-tasman');
+
+            display.innerHTML = `
+                <div class="lg:col-span-2 space-y-6">
+                    <h3 class="heading-font text-2xl font-bold text-industry-botticelli">${data.title}</h3>
+                    <p class="text-industry-tasman/70 leading-relaxed">${data.desc}</p>
+                    <div class="grid grid-cols-2 gap-4 mt-8">
+                        ${data.features.map(f => `
+                            <div class="flex items-center space-x-3 text-[10px] font-bold uppercase tracking-tight">
+                                <span class="text-industry-cherry">◼</span>
+                                <span>${f}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="bg-black/40 p-12 border border-white/5 text-center flex flex-col justify-center">
+                    <div class="w-16 h-1 w-16 mx-auto mb-6 bg-industry-regal"></div>
+                    <span class="text-2xl font-black text-industry-botticelli block">${data.stat}</span>
+                    <span class="text-[10px] uppercase font-bold text-industry-tasman/40 tracking-widest mt-2">Operational Scale</span>
+                </div>
+            `;
+        }
+
+        function initCharts() {
+            const lifeCtx = document.getElementById('lifecycleChart').getContext('2d');
+            new Chart(lifeCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Year 0', 'Year 5', 'Year 10', 'Year 15', 'Year 20', 'Year 25', 'Year 30'],
+                    datasets: [{
+                        label: 'BRS Path',
+                        data: [100, 95, 90, 85, 120, 115, 110],
+                        borderColor: '#8F0A39',
+                        backgroundColor: 'rgba(143, 10, 57, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Legacy Path',
+                        data: [100, 90, 75, 50, 20, 0, 0],
+                        borderColor: '#05436F',
+                        borderDash: [5, 5],
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { 
+                            ticks: { color: '#D3DDD480', font: { size: 10 } },
+                            grid: { color: '#ffffff05' }
+                        },
+                        x: { 
+                            ticks: { color: '#D3DDD480', font: { size: 10 } },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            const radarCtx = document.getElementById('partnerRadar').getContext('2d');
+            new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Technology', 'Mobility', 'Empowerment', 'Digital', 'Scale'],
+                    datasets: [{
+                        label: 'BRS',
+                        data: [95, 88, 92, 90, 98],
+                        backgroundColor: 'rgba(5, 67, 111, 0.3)',
+                        borderColor: '#05436F',
+                        pointBackgroundColor: '#05436F'
+                    }, {
+                        label: 'Avg',
+                        data: [60, 45, 70, 50, 65],
+                        backgroundColor: 'rgba(143, 10, 57, 0.1)',
+                        borderColor: '#8F0A39',
+                        pointBackgroundColor: '#8F0A39'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            grid: { color: '#ffffff10' },
+                            angleLines: { color: '#ffffff10' },
+                            pointLabels: { color: '#D3DDD480', font: { size: 10, family: 'Syncopate' } },
+                            ticks: { display: false, backdropColor: 'transparent' }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#D3DDD4', font: { size: 10 } } }
+                    }
+                }
+            });
+        }
+
+        window.onload = () => {
+            switchFacility('locomotive');
+            initCharts();
+        };
+    </script>
+</body>
+</html>
